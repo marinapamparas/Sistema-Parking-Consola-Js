@@ -12,7 +12,7 @@ function parking () {
             let horas = prompt ("Ingrese cantidad de horas:")
             console.log ("Cantidad de horas: " + horas)
 
-            let vehiculo = prompt ("Ingrese tipo de vehiculo (moto, auto, camioneta): ")
+            let vehiculo = prompt ("Ingrese tipo de vehiculo (moto, auto o camioneta): ")
             console.log ("Vehiculo indicado: " + vehiculo)
             
             let precioFinal = calcularMonto (horas, vehiculo)
