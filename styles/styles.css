@@ -1,0 +1,18 @@
+body {
+    background-color: rgb(213, 255, 245) ;
+}
+
+.titulo{
+    padding: 100px;
+    text-align: center;
+
+}
+
+.infoalusuario{
+    text-align: center;
+}
+
+.table{
+    text-align: center;
+    border: solid; 
+}
