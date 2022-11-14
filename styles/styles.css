@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(213, 255, 245) ;
+    background-color: rgba(205, 233, 112, 0.815) ;
 }
 
 .titulo{
@@ -15,4 +15,5 @@ body {
 .table{
     text-align: center;
     border: solid; 
+
 }
