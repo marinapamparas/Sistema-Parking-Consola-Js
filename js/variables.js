@@ -5,7 +5,7 @@ const vehiculosArray = [
     { id: 3, nombre: "CAMIONETA", precioHora: 120 },
 ]
 
-const montoDisponibleStarter = 500
 
 
-const plata = []
+
+
