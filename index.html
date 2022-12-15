@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/class.pagoparking.js"></script>
     <script defer src="js/variables.js"></script>
     <script defer src="js/index.js"></script>
@@ -16,20 +18,17 @@
 </head>
 <main>
     <body>
-
+        
         <section >
             <article class="presentacion">
                 <h1 class="titulo fw-bold">Sistema de parking</h1>
-                <br>
-                <p class="fs-2 lh-1">Por ser tu primera vez en nuestra plataforma...</p>
-                <p class="fs-1 lh-1">te regalamos $500 para tu estacionamiento medido</p>
-            </article>
+                           </article>
         </section>
         
         <section class="espacio">
             <div class="formulario">
 
-                <h2>Completa los datos para pagar tu estacionamiento</h2>
+                <h2 class="fw-bold">Completa los datos para pagar tu estacionamiento</h2>
                 
                 <label for="patente">Ingresa tu patente</label>
                 <input type="text" id="patente" value="AB111BA" class="selecciones">
@@ -71,35 +70,54 @@
                 
             </div>
         </section>
+
+        <section class="secciontabla">
+            <h3 class="fw-bold">Transacciones realizadas</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th id="tablehead">Día y hora</th>
+                        <th id="tablehead">Patente</th>
+                        <th id="tablehead">Vehiculo</th>
+                        <th id="tablehead">Horas</th>
+                        <th id="tablehead">Costo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
                 
         <section class="container-fluid">
             <div class="row">
             
                 <div class="col-lg-6">
-                    <aside class="secciontabla">
-                        <h3>Precio por hora</h3>
+                    <aside class="asideprecios">
+                        <h3 class="fw-bold">Precio por hora</h3>
+                        
+                        <div class="recuadro">
+                            <p>Motos: $80 la hora</p>
+                        </div>
                         <br>
-                        <table class="table">
-                            <thead>
-                                <th>Moto</th>
-                                <th>Auto</th>
-                                <th>Camioneta</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>$80</th>
-                                    <th>$100</th>
-                                    <th>$120</th>
-                                </tr>
-                            
-                            </tbody>
-
-                        </table>
+                        <div class="recuadro">
+                            <p>Autos: $100 la hora</p>
+                        </div>
+                        <br>
+                        <div class="recuadro">
+                            <p>Camionetas: $120 la hora</p>
+                        </div>
                     </aside>
                 </div>
                 <div class="col-lg-6">
                     <aside class="seccionmapa">
-                        <h3>Plano de La Plata donde hay estacionamiento medido: cuadras, calles y zonas.</h3>
+                        <h3 class="fw-bold">Plano de La Plata donde hay estacionamiento medido: cuadras, calles y zonas.</h3>
                         <img src="img/estacionamientomedido.jpg" alt="plano de La Plata donde hay estacionamiento medido">
                     </aside>
                 </div>

@@ -18,7 +18,7 @@ const cargarArray = (select, array) => {
             select.innerHTML += `<option value="${elemento.precioHora}">${elemento.nombre}</option>`
         });
     } else {
-        alert("Error, faltan cargar los tipos de vehiculos.")
+        alerta(toast, 3000, 'error', 'center', 'Error', 'Faltan cargar los tipos de vehiculos')
     }
 }
 
@@ -52,7 +52,7 @@ const realizarCalculo = () =>{
     if(datosCompletos()) {
         calculoAAbonar()
     }else{
-        alert("Completa los valores solicitados.")
+        alerta(false, 3000, 'warning', 'center', 'Completa los datos solicitados')
     }
 }
 
@@ -72,6 +72,23 @@ function recuperarKeyJSON(){
 
 //funcion para descontar del monto disponible lo que quiera pagar
 
+const arrayTransacciones = JSON.parse(localStorage.getItem("Transacciones")) || []
+
+const transaccionRealizada = () =>{
+    const reservaParking = {
+        patente: inputPatente.value, 
+        vehiculo: selectVehiculo[selectVehiculo.selectedIndex].text,
+        horas: inputHoras.value,
+        costo: costoParking.innerText,
+        fechaReserva: new Date().toLocaleString()
+    }
+    console.log ("prueba de reserva", reservaParking)
+    arrayTransacciones.push(reservaParking)
+    localStorage.setItem("Transacciones", JSON.stringify(arrayTransacciones))
+    
+    alerta(false, 0, 'success', '', '', 'Reserva realizada!')
+}
+
 const descontarSaldo = () =>{
 
     let montoDisponibleStorage =  recuperarKeyJSON();
@@ -83,9 +100,15 @@ const descontarSaldo = () =>{
     montoDisponible.innerText = dinero.calcularSaldo()
     
     guardarMovimientos()
-    }else{
-        alert("No cuenta con saldo suficiente")
+    transaccionRealizada()
+    recuperarTransaccion()
+
     }
+    else{
+        alerta(false, 4000,'error', 'center', 'Ups...', 'No cuenta con saldo suficiente, realice una recarga')
+    }
+
+    
 }
 
 btnCalcular.addEventListener ("click", realizarCalculo)
@@ -100,6 +123,64 @@ const guardarMovimientos = () =>{
     btnPagar.classList.add("ocultar")
 
 }
+
+
+
+
+const alerta = (toast, timer, icon, position, title, text ) => {
+    Swal.fire({
+        toast: toast || false,
+        position: 'center', 
+        icon: icon || 'info', // success, warning, error, question, info
+        title: title || '', 
+        text: text || '',
+        showConfirmButton: true,
+        confirmButtonText: 'Aceptar',
+        timer: timer || "",
+      })
+}
+
+
+
+function armarTablaReservas(transaccion) {
+
+    return `<tr>
+                <td>${transaccion.fechaReserva}</td>
+                <td>${transaccion.patente}</td>
+                <td>${transaccion.vehiculo}</td>
+                <td>${transaccion.horas}</td>
+                <td>${transaccion.costo}</td>
+            </tr>`
+}
+
+function recuperarTransaccion() {
+    let tablaHTML = ""
+    const tbody = document.querySelector("tbody")
+    const transaccioness = JSON.parse(localStorage.getItem("Transacciones")) || []
+
+    if (transaccioness.length > 0) {
+        transaccioness.forEach(reserva => tablaHTML += armarTablaReservas(reserva))
+        tbody.innerHTML = tablaHTML
+    }
+}
+
+
+const inicializar = () =>{
+    recuperarTransaccion()
+    recuperarSaldoLocalStorage()
+}
+
+
+const recuperarSaldoLocalStorage = () =>{
+    let montoDisponibleStorage =  recuperarKeyJSON();
+    montoDisponible.innerText = montoDisponibleStorage
+}
+
+inicializar()
+
+
+
+    
 
 
 
