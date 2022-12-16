@@ -11,9 +11,6 @@ body {
     text-align: center;
 }
 
-
-
-
 .presentacion{
     text-align: center;
     color: antiquewhite;
@@ -104,8 +101,8 @@ body {
 }
 
 .selecciones{
-    background-color:rgba(128, 128, 128, 0.595);
-    color: rgba(255, 255, 255, 0.838);
+    background-color:rgb(128, 128, 128);
+    color:white;
     font-size: large;
     border: 2px solid rgb(255, 255, 255);
     border-radius: 4px;

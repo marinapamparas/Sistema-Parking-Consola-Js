@@ -149,10 +149,6 @@ const toast = (text, bgcolor)=>{
         style: { 
           background: bgcolor || 'linear-gradient(0deg, rgba(98,98,91,0.9) 0%, rgba(84,123,125,0.9) 100%)', borderRadius:'20px', color:'white', fontSize: '30px', height: '350px',width:'500px', display: 'flex', justifyContent: 'center', alignItems: 'center'
         },
-        offset: {
-            x:500,
-            y:150
-        }
         }).showToast();
     
     }
