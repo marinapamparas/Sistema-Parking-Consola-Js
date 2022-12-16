@@ -7,7 +7,40 @@ const btnCalcular = document.querySelector("#botoncalcular")
 const btnPagar = document.querySelector("#botonpagar")
 const costoParking = document.querySelector("#costoparking")
 const montoDisponible = document.querySelector("#montodisponible")
+const paisLocalidad = document.querySelector("#paisLocalidad")
+const URL = 'bbdd/localidad.json'
+const argentina = []
 
+fetch(URL) //PIDO LOS DATOS AL SERVIDOR, O ARCHIVO .JSON
+    .then((response)=> localidad = response.json()) //RECIBO LOS DATOS EN FORMATO TEXTO, Y LOS CONVIERTO EN ARRAY
+    .then ((localidad) => argentina.push (...localidad))
+    .then (()=> cargarLocalidad (argentina))
+
+
+
+
+function retornoLocalidad({img, pais, provincia, localidad}){
+
+    return `<div class= "contenedorlocacion">
+                <img src="${img}" class= "iconolocacion" alt="Bandera del país">
+                <p class="textolocacion">${localidad},</p>
+                <p class="textolocacion">${provincia},</p>
+                <p class="textolocacion">${pais}</p>
+            </div>`
+}
+
+const cargarLocalidad = (array)=>{
+    let locacion = ""
+
+    if(array.length > 0){
+    array.forEach(lugar =>{
+        locacion += retornoLocalidad(lugar)
+
+    })
+
+    paisLocalidad.innerHTML = locacion
+    }
+}
 
 
 // funcion para cargar opciones de seleccion
@@ -140,6 +173,26 @@ const alerta = (toast, timer, icon, position, title, text ) => {
       })
 }
 
+const toast = (text, bgcolor)=>{
+
+    Toastify({
+        text: text || '',
+        duration: 5000,
+        gravity: "bottom",
+        position: "right", 
+        stopOnFocus: true, 
+        close: true,
+        style: { 
+          background: bgcolor || 'linear-gradient(0deg, rgba(98,98,91,0.9) 0%, rgba(84,123,125,0.9) 100%)', borderRadius:'20px', color:'white', fontSize: '30px', height: '350px',width:'500px', display: 'flex', justifyContent: 'center', alignItems: 'center'
+        },
+        offset: {
+            x:500,
+            y:150
+        }
+      }).showToast();
+    
+    }
+
 
 
 function armarTablaReservas(transaccion) {
@@ -164,10 +217,17 @@ function recuperarTransaccion() {
     }
 }
 
+const regaloBienvenida = () =>{
+    
+    if (localStorage.getItem("saldoRestante") === null){
+        toast ('¡BIENVENIDO! por ser tu primera vez te regalamos $500 para tus reservas de parking')
+    }
+}
 
 const inicializar = () =>{
     recuperarTransaccion()
     recuperarSaldoLocalStorage()
+    regaloBienvenida()
 }
 
 
@@ -175,6 +235,8 @@ const recuperarSaldoLocalStorage = () =>{
     let montoDisponibleStorage =  recuperarKeyJSON();
     montoDisponible.innerText = montoDisponibleStorage
 }
+
+
 
 inicializar()
 

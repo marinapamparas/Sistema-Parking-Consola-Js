@@ -17,14 +17,14 @@ body {
 .presentacion{
     text-align: center;
     color: antiquewhite;
-    background-color: rgba(22, 94, 70, 0.349);
+    background-color: rgba(128, 128, 128, 0.437);;
     border-radius: 20px;
     padding: 30px;
     margin-top: 30px;
 }
 
 .titulo{
-    padding: 10px;
+    padding: 20px;
     text-align: center;
     color: antiquewhite;
 }
@@ -36,9 +36,11 @@ body {
     align-items: center;
 }
 .formulario{
+    display: flex;
+    flex-direction: column;
     text-align: center;
     color: antiquewhite;
-    background-color: rgba(22, 94, 70, 0.897);
+    background-color: rgba(128, 128, 128, 0.792);
     border-radius: 20px;
     padding: 30px;
     margin-top: 30px;
@@ -49,7 +51,7 @@ body {
     text-align: center;
     width: 100%;
     color: antiquewhite;
-    background-color: rgba(22, 94, 70, 0.712);
+    background-color: rgba(128, 128, 128, 0.792);
     border-radius: 20px;
     padding: 30px 30px;
     margin: 30px 0px;
@@ -58,13 +60,19 @@ body {
 .seccionmapa{
     text-align: center;
     color: antiquewhite;
-    background-color: rgba(22, 94, 70, 0.712);
+    background-color: rgba(128, 128, 128, 0.73);
+    width: 100%;
+    
     border-radius: 20px;
     padding: 30px;
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
+.img{
+    object-fit: contain;
+    width: 100%;
+}
 
 .table{
     width: 100%;
@@ -80,14 +88,15 @@ body {
     border-radius: 15px;
     border-color: rgb(255, 255, 255);
     background-color: rgba(66, 179, 141, 0);
+    color: white;
     padding: 8px 10px;
     
 }
 
 .boton:hover{
-    color: rgba(22, 94, 70, 0.712);
-    background-color: rgba(255, 255, 255, 0.562);
-    border-color:  rgba(22, 94, 70, 0.712);
+    color: gba(66, 179, 141, 0);
+    background-color: rgb(128, 128, 128);
+    border-color:  gba(66, 179, 141, 0);
 }
 
 .ocultar {
@@ -95,9 +104,12 @@ body {
 }
 
 .selecciones{
-    background-color:rgb(22, 94, 70);
+    background-color:rgba(128, 128, 128, 0.595);
     color: rgba(255, 255, 255, 0.838);
-    font-size: medium;
+    font-size: large;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    padding: 10px;
 }
 
 .recuadro{
@@ -113,8 +125,46 @@ body {
 .asideprecios{
     font-size: large;
     color: antiquewhite;
-    background-color: rgba(22, 94, 70, 0.712);
+    background-color: rgba(128, 128, 128, 0.682);
     border-radius: 20px;
     padding: 50px 30px;
     margin: 30px 0px;
 }
+
+@media (max-width:600px) {
+    .table {
+        display: inline-block;
+        align-content: center;
+    }
+    .contenidotabla{
+        width: 100%;
+        padding: 10vw;
+    }
+    
+}
+
+.contenedorlocacion{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    background-color: rgba(128, 128, 128, 0.437);
+    padding: 20px;
+}
+
+.iconolocacion{
+    width: 30px;
+    height: 20px;
+    margin: 15px 10px 10px 45px;
+
+}
+
+.textolocacion{
+    
+    margin: 5px 2px 2.5px;
+    color: white;
+}
+
+
+
