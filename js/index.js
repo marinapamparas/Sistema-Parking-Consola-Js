@@ -1,5 +1,3 @@
-//variables que linkean con los id del html
-
 const inputPatente = document.querySelector("#patente")
 const selectVehiculo = document.querySelector("#vehiculo")
 const inputHoras = document.querySelector("#horas")
@@ -11,13 +9,10 @@ const paisLocalidad = document.querySelector("#paisLocalidad")
 const URL = 'bbdd/localidad.json'
 const argentina = []
 
-fetch(URL) //PIDO LOS DATOS AL SERVIDOR, O ARCHIVO .JSON
-    .then((response)=> localidad = response.json()) //RECIBO LOS DATOS EN FORMATO TEXTO, Y LOS CONVIERTO EN ARRAY
+fetch(URL) 
+    .then((response)=> localidad = response.json()) 
     .then ((localidad) => argentina.push (...localidad))
     .then (()=> cargarLocalidad (argentina))
-
-
-
 
 function retornoLocalidad({img, pais, provincia, localidad}){
 
@@ -33,17 +28,12 @@ const cargarLocalidad = (array)=>{
     let locacion = ""
 
     if(array.length > 0){
-    array.forEach(lugar =>{
+        array.forEach(lugar =>{
         locacion += retornoLocalidad(lugar)
-
     })
-
     paisLocalidad.innerHTML = locacion
     }
 }
-
-
-// funcion para cargar opciones de seleccion
 
 const cargarArray = (select, array) => {
     if(array.length > 0) {
@@ -55,13 +45,10 @@ const cargarArray = (select, array) => {
     }
 }
 
-//invocando la funcion
-
 cargarArray(selectVehiculo, vehiculosArray)
 
-//funcion para que marque true o false si ingreso bien los datos
-
 const datosCompletos = () => {
+
     if(inputPatente !== "" && selectVehiculo.value !== "..." && inputHoras.value >= 1){
         return true
     }else{
@@ -69,30 +56,16 @@ const datosCompletos = () => {
     }
 }
 
-//funcion para calcular
-
 const calculoAAbonar = () =>{
     const calculo = new CalculoParking (selectVehiculo.value, inputHoras.value)
         costoParking.innerText = calculo.sacarcalculo()
         btnPagar.classList.remove("ocultar")
 }
 
+const realizarCalculo = () =>{ datosCompletos () ? calculoAAbonar () : alerta }
 
 
-//con esta funcion vemos si estan los datos para recien ahi lanzar la funcion calcular y sino un alert
-
-const realizarCalculo = () =>{
-    if(datosCompletos()) {
-        calculoAAbonar()
-    }else{
-        alerta(false, 3000, 'warning', 'center', 'Completa los datos solicitados')
-    }
-}
-
-//para recuperar el ultimo saldo del usuario del local storage uso esta funcion
-
-function recuperarKeyJSON(){
-    
+const recuperarKeyJSON = () =>{
     if (localStorage.getItem("saldoRestante") != null){
         
         let registro = JSON.parse(localStorage.getItem("saldoRestante"))
@@ -102,8 +75,6 @@ function recuperarKeyJSON(){
         return 500
     }
 }
-
-//funcion para descontar del monto disponible lo que quiera pagar
 
 const arrayTransacciones = JSON.parse(localStorage.getItem("Transacciones")) || []
 
@@ -129,12 +100,12 @@ const descontarSaldo = () =>{
 
     if (montoDisponibleStorage >= restar){
 
-    const dinero = new MovimientosDeSaldo (montoDisponibleStorage, restar)
-    montoDisponible.innerText = dinero.calcularSaldo()
-    
-    guardarMovimientos()
-    transaccionRealizada()
-    recuperarTransaccion()
+        const dinero = new MovimientosDeSaldo (montoDisponibleStorage, restar)
+        montoDisponible.innerText = dinero.calcularSaldo()
+        
+        guardarMovimientos()
+        transaccionRealizada()
+        recuperarTransaccion()
 
     }
     else{
@@ -148,29 +119,22 @@ btnCalcular.addEventListener ("click", realizarCalculo)
 btnPagar.addEventListener ("click", descontarSaldo)
 
 const guardarMovimientos = () =>{
-
-    const compraParking = {saldoRestante: montoDisponible.innerText
-    }
+    const compraParking = {saldoRestante: montoDisponible.innerText}
     localStorage.setItem("saldoRestante", JSON.stringify(compraParking))
-
     btnPagar.classList.add("ocultar")
-
 }
-
-
-
 
 const alerta = (toast, timer, icon, position, title, text ) => {
     Swal.fire({
         toast: toast || false,
         position: 'center', 
-        icon: icon || 'info', // success, warning, error, question, info
+        icon: icon || 'info', 
         title: title || '', 
         text: text || '',
         showConfirmButton: true,
         confirmButtonText: 'Aceptar',
         timer: timer || "",
-      })
+    })
 }
 
 const toast = (text, bgcolor)=>{
@@ -189,14 +153,11 @@ const toast = (text, bgcolor)=>{
             x:500,
             y:150
         }
-      }).showToast();
+        }).showToast();
     
     }
 
-
-
-function armarTablaReservas(transaccion) {
-
+const armarTablaReservas = (transaccion) =>{
     return `<tr>
                 <td>${transaccion.fechaReserva}</td>
                 <td>${transaccion.patente}</td>
@@ -206,7 +167,7 @@ function armarTablaReservas(transaccion) {
             </tr>`
 }
 
-function recuperarTransaccion() {
+const recuperarTransaccion = () =>{
     let tablaHTML = ""
     const tbody = document.querySelector("tbody")
     const transaccioness = JSON.parse(localStorage.getItem("Transacciones")) || []
@@ -217,8 +178,7 @@ function recuperarTransaccion() {
     }
 }
 
-const regaloBienvenida = () =>{
-    
+const regaloBienvenida = () =>{     
     if (localStorage.getItem("saldoRestante") === null){
         toast ('¡BIENVENIDO! por ser tu primera vez te regalamos $500 para tus reservas de parking')
     }
@@ -235,8 +195,6 @@ const recuperarSaldoLocalStorage = () =>{
     let montoDisponibleStorage =  recuperarKeyJSON();
     montoDisponible.innerText = montoDisponibleStorage
 }
-
-
 
 inicializar()
 
