@@ -8,6 +8,7 @@ This project is a parking sistem build with HTML, JavaScript and CSS.  It emphas
 -   Vehicle Selection: Choose your vehicle type (car, motorcycle, or truck).
 -   Parking Locator: Find the locations where parking payment is required.
 -   Transaction Details: View detailed records of completed transactions, including time, date, cost, vehicle type, and total hours.
+-   LocalStorage Integration: Transaction details are saved in localStorage, allowing users to revisit their transaction history even after refreshing or closing the browser.
 
 ## <b>Technologies Used</b>
 -   HTML5: For structuring the user interface.
